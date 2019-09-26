@@ -289,11 +289,6 @@ class build(_build):
             if run_process(make_cmd) != 0:
                 raise DistutilsSetupError(" ".join(make_cmd))
 
-            make_cmd = [MAKE_PATH, "install"]
-            log.info("Installing...")
-            if run_process(make_cmd) != 0:
-                raise DistutilsSetupError(" ".join(make_cmd))
-
             if platform.system() == "Darwin":  # macOS
                 for filename in DATA_FILES:
                     new_install_name = "@loader_path/" + os.path.basename(filename)
