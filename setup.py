@@ -289,6 +289,13 @@ class build(_build):
             if run_process(make_cmd) != 0:
                 raise DistutilsSetupError(" ".join(make_cmd))
 
+            setup_cmd = [sys.executable, "setup.py", "install"]
+            log.info("Installing Python modules...")
+            os.chdir("python")
+            if run_process(setup_cmd) != 0:
+                raise DistutilsSetupError(" ".join(setup_cmd))                
+                
+
             if platform.system() == "Darwin":  # macOS
                 for filename in DATA_FILES:
                     new_install_name = "@loader_path/" + os.path.basename(filename)
@@ -335,9 +342,7 @@ class build_ext(_build_ext):
         log.info("COMPILER_ARGS=%r" % " ".join(COMPILER_ARGS))
         log.info("EXTRA_LINK_ARGS=%r" % " ".join(EXTRA_LINK_ARGS))
         log.info("RUNTIME_LIB_DIRS=%r" % " ".join(RUNTIME_LIB_DIRS))
-        
-        log.info("skipping the '_build_ext.run(self)' command it's already been run as part of 'build' (I think)")
-        ###_build_ext.run(self)
+        _build_ext.run(self)
         if os.path.abspath(".") != SCRIPT_DIR:
             log.info("Copying built extensions...")
             for d in os.listdir("build"):
