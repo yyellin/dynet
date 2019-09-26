@@ -335,7 +335,9 @@ class build_ext(_build_ext):
         log.info("COMPILER_ARGS=%r" % " ".join(COMPILER_ARGS))
         log.info("EXTRA_LINK_ARGS=%r" % " ".join(EXTRA_LINK_ARGS))
         log.info("RUNTIME_LIB_DIRS=%r" % " ".join(RUNTIME_LIB_DIRS))
-        _build_ext.run(self)
+        
+        log.info("skipping the '_build_ext.run(self)' command it's already been run as part of 'build' (I think)")
+        ###_build_ext.run(self)
         if os.path.abspath(".") != SCRIPT_DIR:
             log.info("Copying built extensions...")
             for d in os.listdir("build"):
