@@ -289,12 +289,6 @@ class build(_build):
             if run_process(make_cmd) != 0:
                 raise DistutilsSetupError(" ".join(make_cmd))
 
-            setup_cmd = [sys.executable, "setup.py", "install"]
-            log.info("Installing Python modules...")
-            os.chdir("python")
-            if run_process(setup_cmd) != 0:
-                raise DistutilsSetupError(" ".join(setup_cmd))                
-                
 
             if platform.system() == "Darwin":  # macOS
                 for filename in DATA_FILES:
