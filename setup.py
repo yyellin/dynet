@@ -327,8 +327,10 @@ class install_data(_install_data):
 class build_ext(_build_ext):
     def run(self):
         if BUILT_EXTENSIONS:
-            INCLUDE_DIRS.append(EIGEN3_INCLUDE_DIR)
-            LIBRARY_DIRS.append(BUILD_DIR + "/dynet/")
+           return
+    
+        INCLUDE_DIRS.append(EIGEN3_INCLUDE_DIR)
+        LIBRARY_DIRS.append(BUILD_DIR + "/dynet/")
         log.info("Building Cython extensions...")
         log.info("INCLUDE_DIRS=%r" % " ".join(INCLUDE_DIRS))
         log.info("LIBRARIES=%r" % " ".join(LIBRARIES))
